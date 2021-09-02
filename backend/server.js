@@ -5,15 +5,18 @@ import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
 import orderRouter from './routers/orderRouter.js';
 
+import cors from  'cors' ;
+
 dotenv.config()
 
 
 const app = express();
 app.use(express.json());
+app.use( cors() );
 
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/e-commerce', {
+mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useCreateIndex: true,

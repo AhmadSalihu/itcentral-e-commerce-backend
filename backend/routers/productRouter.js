@@ -7,7 +7,7 @@ const productRouter = express.Router();
 
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
 	const products = await Product.find({});
-	res.json(products);
+	res.send(products);
 }));
 
 productRouter.get('/seed', expressAsyncHandler(async (req, res) => {
@@ -19,9 +19,10 @@ productRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 
 productRouter.get('/:id',
 	expressAsyncHandler(async (req, res) => {
+	console.log('Request sent')
 	const product = await Product.findById(req.params.id);
 	if (product) {
-		res.json(product)
+		res.send(product)
 	} else {
 		res.status(404).send({ message: 'Product Not Found' });
 	}
